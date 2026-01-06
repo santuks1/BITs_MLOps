@@ -1,0 +1,45 @@
+{
+  "dashboard": {
+    "title": "Heart Disease API Monitoring",
+    "tags": ["mlops", "api"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "title": "Total Predictions",
+        "targets": [
+          {
+            "expr": "increase(predictions_total[5m])"
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "title": "Prediction Latency (p95)",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, prediction_duration_seconds)"
+          }
+        ],
+        "type": "graph"
+      },
+      {
+        "title": "Error Rate",
+        "targets": [
+          {
+            "expr": "rate(errors_total[5m])"
+          }
+        ],
+        "type": "graph"
+      },
+      {
+        "title": "Model Performance",
+        "targets": [
+          {
+            "expr": "predictions_total"
+          }
+        ],
+        "type": "piechart"
+      }
+    ]
+  }
+}
